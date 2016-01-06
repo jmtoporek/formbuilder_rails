@@ -8,6 +8,22 @@
   <dd><%= @configurator.name %></dd>
 </dl>
 
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:slug) %>:</strong></dt>
+  <dd><%= @configurator.slug %></dd>
+</dl>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:key) %>:</strong></dt>
+  <dd><%= @configurator.key %></dd>
+</dl>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:datastore) %>:</strong></dt>
+  <dd><%= @configurator.datastore %></dd>
+</dl>
+
+
 <%= link_to t('.back', :default => t("helpers.links.back")),
               configurators_path, :class => 'btn btn-default'  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
