@@ -36,28 +36,55 @@ RSpec.describe Configurator, type: :model do
   end
 
   describe "automatically created values for slug and key" do
-    it "automatically sets key on create" do
-      config = create(:configurator)
-      config.valid?
-      expect(config.key).not_to be(nil)
-      expect(config.key.length).to be(20)
-    end
-
-    it "automatically sets slug on create" do
-      cname = "This is a test, ya'll!"
-      config = create(:configurator, name: cname)
-      expect(config.slug).to eq(cname.parameterize)
-    end
-
-    it "automatically generates unique slug when a new configurator is created with same name as existing configurator" do
-      c_name   = "test uno"
-      c1_slug  = c_name.parameterize
-      c1a_slug = c1_slug + "-1"
     
-      c1 = create(:configurator, name: c_name)
-      expect(c1.slug).to eq(c1_slug)
-      c1a = create(:configurator, name: c_name)
-      expect(c1a.slug).to eq(c1a_slug)
+    describe "key" do
+      
+      it "it automatically sets key on create" do
+        config = create(:configurator)
+        config.valid?
+        expect(config.key).not_to be(nil)
+        expect(config.key.length).to be(20)
+      end
+      
+      it "it leaves key unchanged on updated configurator" do
+        config = create(:configurator)
+        expect(config.key.length).to be(20)
+        old_key = config.key
+        config.name = "modified name"
+        config.save
+        expect(config.key).to eq(old_key)
+      end
+    end
+    
+    describe "slug" do
+
+      it "it automatically sets slug on create" do
+        cname = "This is a test, ya'll!"
+        config = create(:configurator, name: cname)
+        expect(config.slug).to eq(cname.parameterize)
+      end
+      
+      it "it updates slug value on update" do
+        c_name_old = "new configurator"
+        config = create(:configurator, name: c_name_old)
+        expect(config.slug).to eq(c_name_old.parameterize)
+        c_name_new = "edited configurator"
+        config.name = c_name_new
+        config.save
+        expect(config.slug).to eq(c_name_new.parameterize)
+      end
+
+      it "automatically generates unique slug when a new configurator is created with same name as existing configurator" do
+        c_name   = "test uno"
+        c1_slug  = c_name.parameterize
+        c1a_slug = c1_slug + "-1"
+    
+        c1 = create(:configurator, name: c_name)
+        expect(c1.slug).to eq(c1_slug)
+        c1a = create(:configurator, name: c_name)
+        expect(c1a.slug).to eq(c1a_slug)
+      end
+      
     end
 
   end
