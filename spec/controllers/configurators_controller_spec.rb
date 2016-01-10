@@ -45,8 +45,9 @@ RSpec.describe ConfiguratorsController, type: :controller do
   describe "GET #index" do
     it "assigns all configurators as @configurators" do
       configurator = Configurator.create! valid_attributes
+      c2 = create(:configurator)
       get :index, {}, valid_session
-      expect(assigns(:configurators)).to eq([configurator])
+      expect(assigns(:configurators)).to eq([configurator,c2])
     end
   end
 
@@ -159,6 +160,15 @@ RSpec.describe ConfiguratorsController, type: :controller do
       configurator = Configurator.create! valid_attributes
       delete :destroy, {:id => configurator.to_param}, valid_session
       expect(response).to redirect_to(configurators_url)
+    end
+  end
+  
+  #under constuction
+  describe "GET #preview" do
+    it "shows the configurator preview" do
+      configurator = Configurator.create! valid_attributes
+      get :preview, {:id => configurator.id }, valid_session
+      expect(assigns(:configurator)).to eq(configurator)
     end
   end
 

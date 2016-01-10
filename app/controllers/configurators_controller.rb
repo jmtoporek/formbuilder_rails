@@ -11,6 +11,12 @@ class ConfiguratorsController < ApplicationController
   # GET /configurators/1.json
   def show
   end
+  
+  def preview
+    @configurator = Configurator.find(params[:id])
+    @array        = Array.new
+    render :text => "this is a test"
+  end
 
   # GET /configurators/new
   def new
