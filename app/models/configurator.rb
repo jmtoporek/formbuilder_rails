@@ -4,6 +4,7 @@ class Configurator < ActiveRecord::Base
   before_save :strip_name
   validates :name, presence: true
   validates :slug, presence: true, uniqueness: true
+  has_many :formelements
   
   private
    

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :configurators do
+    resources :formelements
     member do
       get "preview"
     end
