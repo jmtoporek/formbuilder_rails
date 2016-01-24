@@ -1,8 +1,10 @@
 class FormelementsController < ApplicationController
   before_action :set_formelement, only: [:show, :edit, :update, :destroy]
+  before_action :set_configurator
 
   # GET /formelements
   # GET /formelements.json
+  # TODO do we even need this? List of formelements only shown in context of configurator
   def index
     @formelements = Formelement.all
   end
@@ -24,11 +26,12 @@ class FormelementsController < ApplicationController
   # POST /formelements
   # POST /formelements.json
   def create
-    @formelement = formelement.new(formelement_params)
+    @formelement = Formelement.new(formelement_params)
+    @formelement.configurator_id = params[:configurator_id]
 
     respond_to do |format|
       if @formelement.save
-        format.html { redirect_to @formelement, notice: 'formelement was successfully created.' }
+        format.html { redirect_to configurator_path(@formelement.configurator_id), notice: 'formelement was successfully created.' }
         format.json { render :show, status: :created, location: @formelement }
       else
         format.html { render :new }
@@ -64,7 +67,11 @@ class FormelementsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_formelement
-      @formelement = Formelement.find(params[:id])
+      @formelement = Formelement.find(params[:id])      
+    end
+
+    def set_configurator
+      @configurator = Configurator.find(params[:configurator_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

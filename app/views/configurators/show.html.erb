@@ -29,13 +29,15 @@
 Form elements
 <ul>
   <% @configurator.formelements.each do |f|%>
-  <li><%= f.id %></li>
+  <li><%= f.name %></li>
   <% end %>
 </ul>
 
 <% else %>
 <h4>no form elements</h4>
 <% end %>
+
+<%= link_to "Add new formelement", new_configurator_formelement_path(@configurator.id), :class => 'btn btn-default' %>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
               configurators_path, :class => 'btn btn-default'  %>
