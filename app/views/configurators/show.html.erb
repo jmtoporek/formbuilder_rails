@@ -27,18 +27,28 @@
 <hr />
 
 Form elements
-<ul>
-  <% @configurator.formelements.each do |f|%>
-  <li><%= f.name %></li>
-  <% end %>
-</ul>
-
+<table class='table table-bordered'>
+  <thead>
+    <tr>
+      <th>Attribute Name</th>
+      <th>actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @configurator.formelements.each do |formelement|%>
+    <tr>
+      <td><%= link_to formelement.name, configurator_formelement_path(@configurator, formelement) %></td>
+      <td>...</td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 <% else %>
 <h4>no form elements</h4>
 <% end %>
 
 <%= link_to "Add new formelement", new_configurator_formelement_path(@configurator.id), :class => 'btn btn-default' %>
-
+<br />
 <%= link_to t('.back', :default => t("helpers.links.back")),
               configurators_path, :class => 'btn btn-default'  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
