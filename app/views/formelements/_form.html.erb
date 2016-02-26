@@ -16,15 +16,31 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :name, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
+    <%= f.label :label, :class => 'control-label col-lg-3' %>
+    <div class="col-lg-6">
+      <%= f.text_field :label, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:label) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :name, :class => 'control-label col-lg-3' %>
+    <div class="col-lg-6">
       <%= f.text_field :name, :class => 'form-control' %>
     </div>
     <%=f.error_span(:name) %>
   </div>
+  
+  <div class="form-group">
+    <%= f.label :type, :class => 'control-label col-lg-3' %>
+    <div class="col-lg-6">
+      <%= f.select :type, [:Textfield, :Selectfield, :Checkboxfield], {prompt: 'Select Type'}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:type) %>
+  </div>
 
   <div class="form-group">
-    <div class="col-lg-offset-2 col-lg-10">
+    <div class="col-lg-offset-3 col-lg-6">
       <%= f.submit nil, :class => 'btn btn-primary' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 configurators_path, :class => 'btn btn-default' %>

@@ -26,7 +26,7 @@ class FormelementsController < ApplicationController
   # POST /formelements
   # POST /formelements.json
   def create
-    @formelement = Formelement.new(formelement_params)
+    @formelement = get_new_form_element_by_type(formelement_params)
     @formelement.configurator_id = params[:configurator_id]
 
     respond_to do |format|
@@ -45,7 +45,7 @@ class FormelementsController < ApplicationController
   def update
     respond_to do |format|
       if @formelement.update(formelement_params)
-        format.html { redirect_to @formelement, notice: 'Formelement was successfully updated.' }
+        format.html { redirect_to configurator_formelement_path(@formelement.configurator_id, @formelement), notice: 'Formelement was successfully updated.' }
         format.json { render :show, status: :ok, location: @formelement }
       else
         format.html { render :edit }
@@ -63,6 +63,19 @@ class FormelementsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def get_new_form_element_by_type(params)
+    type = params[:type]
+    formelement = case type
+    when 'Selectfield'
+      Selectfield.new(params)
+    when 'Textfield'
+      Textfield.new(params)
+    else
+      Formelement.new(params)
+    end
+    formelement
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -76,6 +89,6 @@ class FormelementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def formelement_params
-      params.require(:formelement).permit(:name)
+      params.require(:formelement).permit(:name, :label, :type)
     end
 end

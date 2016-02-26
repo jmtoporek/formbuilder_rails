@@ -26,18 +26,20 @@
 <% if @configurator.formelements.length > 0 %>
 <hr />
 
-Form elements
+<h2>Form elements</h2>
 <table class='table table-bordered'>
   <thead>
     <tr>
-      <th>Attribute Name</th>
+      <th>Form Element Name</th>
+      <th>Type</th>
       <th>actions</th>
     </tr>
   </thead>
   <tbody>
     <% @configurator.formelements.each do |formelement|%>
     <tr>
-      <td><%= link_to formelement.name, configurator_formelement_path(@configurator, formelement) %></td>
+      <td><%= link_to formelement.name, configurator_formelement_path(@configurator, formelement), :class => 'btn' %></td>
+      <td><%= formelement.tag_type %></td>
       <td>...</td>
     </tr>
     <% end %>

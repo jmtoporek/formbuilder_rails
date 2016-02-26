@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :configurators do
     resources :formelements
+    resources :selectfields, :controller => :formelements, :type => "Selectfield"
+    resources :textfields, :controller => :formelements, :type => "Textfield"
+    resources :checkboxfields, :controller => :formelements, :type => "Checkboxfield"
     member do
       get "preview"
     end

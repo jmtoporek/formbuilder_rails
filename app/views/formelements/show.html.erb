@@ -1,3 +1,4 @@
 <%= @formelement.name %>
 
-<%= link_to 'Back to configurator', configurator_path(@formelement.configurator_id) %>
+<%= link_to 'Edit', edit_configurator_formelement_path(@formelement.configurator_id, @formelement), :class => 'btn btn-default' %>
+<%= link_to 'Back to configurator', configurator_path(@formelement.configurator_id), :class => 'btn btn-default' %>
