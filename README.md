@@ -4,7 +4,7 @@ This is an application of a Formbuilder (Wufoo clone) using Rails on the back en
 
 As of 2015.12.29 it uses
 * Rails 4.2.4
-* Database: Like rails its designed to be database agnositc so SQL database (but mainly tested onn MySQL and Postgres)
+* Database: Like rails its designed to be database agnositc so SQL database (but mainly tested on MySQL and Postgres)
 * RSpec for testing
 
 ## Installation
