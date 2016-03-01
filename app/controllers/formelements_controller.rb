@@ -59,7 +59,7 @@ class FormelementsController < ApplicationController
   def destroy
     @formelement.destroy
     respond_to do |format|
-      format.html { redirect_to formelements_url, notice: 'Formelement was successfully destroyed.' }
+      format.html { redirect_to configurator_path(@formelement.configurator_id), notice: 'Formelement was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
