@@ -12,11 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require react
+//= require react_ujs
+  
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
 
-//= require react
-//= require components
-//= require react_ujs
 //= require components
