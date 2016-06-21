@@ -41,7 +41,7 @@
     <tr>
       <td><%= link_to formelement.name, configurator_formelement_path(@configurator, formelement), :class => 'btn btn-default' %></td>
       <td><%= formelement.label %></td>
-      <td><%= formelement.tag_type %></td>
+      <td><%= formelement.type %></td>
       <td><%= link_to t('.destroy', :default => t("helpers.links.destroy")),
               configurator_formelement_path(@configurator, formelement),
               :method => 'delete',

@@ -1,3 +1,13 @@
+<% element_type_props = {
+  attributeName: 'formelement[type]',
+  availableOptions: [
+    {value: 'Textfield'}, 
+    {value: 'Selectfield'},
+    {value: 'Checkboxfield'}
+  ],
+  selectedValue: @formelement.type
+}
+%>
 <%= form_for [@configurator, @formelement], :html => { :class => "form-horizontal configurator" } do |f| %>
 
   <% if @formelement.errors.any? %>
@@ -34,9 +44,8 @@
   <div class="form-group">
     <%= f.label :type, :class => 'control-label col-lg-3' %>
     <div class="col-lg-6">
-      <%= f.select :type, [:Textfield, :Selectfield, :Checkboxfield], {prompt: 'Select Type'}, :class => 'form-control' %>
+      <%= react_component('FormElementTypeSelector', element_type_props, {prerender: true}) %>
     </div>
-    <%=f.error_span(:type) %>
   </div>
 
   <div class="form-group">
